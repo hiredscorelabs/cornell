@@ -1,5 +1,5 @@
 ---
-sidebar_position: 3
+sidebar_position: 2
 sidebar_label: Starting Cornell from your own module
 title: Starting Cornell from your own module
 ---
