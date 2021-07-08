@@ -33,7 +33,7 @@ setup(
     long_description_content_type='text/markdown',
     url="https://hiredscorelabs.github.io/cornell/",
     author="Yael Mintz",
-    author_email="iddqd@hiredscore.com",
+    author_email="yaelmi3@gmail.com",
     license="MIT",
     entry_points={'console_scripts': ['cornell = cornell.cornell_server:start_mock_service']},
     install_requires=requirements,
