@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.com/hiredscorelabs/cornell.svg?branch=master)](https://travis-ci.com/hiredscorelabs/cornell)
 
-> Cornell makes it dead simple, via it's record and replay features to perform end-to-end testing in a fast and isolated testing environment.
+> Cornell makes it dead simple, via its record and replay features to perform end-to-end testing in a fast and isolated testing environment.
 
 ![Cornell Logo](https://imgur.com/ShxP4AI.png)
 
