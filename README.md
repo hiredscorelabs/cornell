@@ -128,6 +128,9 @@ In addition to the [vcrpy matchers](https://vcrpy.readthedocs.io/en/latest/confi
 Since Cornell is a testing server it's executed by default with `FLASK_ENV=local`.
 You can modify this as described in [flask configuration](https://flask.palletsprojects.com/en/2.0.x/config/#configuration-handling)
 
+### Advanced Features
+
+Can be found in the [documentation](https://hiredscorelabs.github.io/cornell/docs/examples/)
 
 ## Contributing
 
