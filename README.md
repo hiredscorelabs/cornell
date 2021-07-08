@@ -69,7 +69,7 @@ cornell -ff https://api.github.com/ --record -cd cassettes
 
 This will start the server in record-proxy mode on port `9000`, and will forward all requests to `https://api.github.com/`
 
-![System in test](https://imgur.com/tTm39E1.gif)
+[![asciicast](https://asciinema.org/a/424496.svg)](https://asciinema.org/a/424496)
 
 When cornell is in record mode, it will forward all request to the specified forwarding url, for example:
 
@@ -83,7 +83,7 @@ requests.get("http://127.0.0.1:9000/github/repos/kevin1024/vcrpy/license").json(
 
 or you can browse to the url using your browser
 
-![Browser](https://imgur.com/w1lyIK7.gif)
+![Browser](https://imgur.com/GMgF6Cx.gif)
 
 Cornell will forward the request to the specified url and will record both the request and the response.
 
