@@ -16,6 +16,7 @@ from flask import Flask, request
 from structlog import get_logger
 from toolz import get_in
 from werkzeug.exceptions import NotFound
+from werkzeug.utils import secure_filename
 from yarl import URL
 
 from cornell.vcr_settings import get_custom_vcr, request_has_matches
@@ -122,7 +123,7 @@ def _obtain_player_context(cassette_path):
 
 
 def _generate_cassette_path(vcr_dir, url_path):
-    file_path = f'{url_path.replace("/", "_")}.yaml' if url_path else "null"
+    file_path = f'{secure_filename(url_path)}.yaml' if url_path else "null"
     record_path = app.config.cassettes_dir if app.config.fixed_path else _get_vcr_dir(vcr_dir)
     return str((record_path / file_path).absolute())
 
