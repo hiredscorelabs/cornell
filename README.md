@@ -83,7 +83,7 @@ requests.get("http://127.0.0.1:9000/github/repos/kevin1024/vcrpy/license").json(
 
 or you can browse to the url using your browser
 
-![Browser](https://imgur.com/w1lyIK7.gif)
+![Browser](https://imgur.com/GMgF6Cx.gif)
 
 Cornell will forward the request to the specified url and will record both the request and the response.
 

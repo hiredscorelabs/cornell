@@ -4,4 +4,4 @@ sidebar_label: System In Action
 title: System In Action
 ---
 
-![System in test](https://imgur.com/tTm39E1.gif)
+[![asciicast](https://asciinema.org/a/424496.svg)](https://asciinema.org/a/424496)
