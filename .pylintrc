@@ -1,0 +1,8 @@
+[MESSAGES CONTROL]
+disable=R,missing-docstring,redefined-outer-name
+
+[FORMAT]
+max-line-length=140
+
+[REPORTS]
+reports=no
