@@ -6,5 +6,5 @@ configure:
 
 publish:
 	python setup.py sdist
-	pip install twin
+	pip install twine
 	twine upload dist/*
