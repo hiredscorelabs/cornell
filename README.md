@@ -4,7 +4,7 @@
 
 > Cornell makes it dead simple, via it's record and replay features to perform end-to-end testing in a fast and isolated testing environment.
 
-![Cornell Logo](docs/static/img/cornell.png)
+![Cornell Logo](https://imgur.com/ShxP4AI.png)
 
 When your application integrates with multiple web based services, end-to-end testing is crucial before deploying to production.
 Mocking is often a tedious task, it becomes even more tiresome when working with multiple APIs from multiple vendors.
