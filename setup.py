@@ -37,5 +37,9 @@ setup(
     license="MIT",
     entry_points={'console_scripts': ['cornell = cornell.cornell_server:start_mock_service']},
     install_requires=requirements,
-    extras_require=dev_requirements
+    extras_require=dev_requirements,
+    project_urls={
+        'Documentation': 'https://hiredscorelabs.github.io/cornell/',
+        'Source': 'https://github.com/hiredscorelabs/cornell',
+    },
 )

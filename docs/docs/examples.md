@@ -4,4 +4,5 @@ sidebar_label: System In Action
 title: System In Action
 ---
 
-[![asciicast](https://asciinema.org/a/424496.svg)](https://asciinema.org/a/424496)
+![Cornell demo](https://imgur.com/ky5NBPf.gif)
+
