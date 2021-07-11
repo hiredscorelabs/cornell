@@ -78,7 +78,7 @@ requests.get("http://127.0.0.1:9000/github/repos/kevin1024/vcrpy/license").json(
 ```
 or
 ```
-requests.get("http://127.0.0.1:9000/github/repos/kevin1024/vcrpy/license").json()
+requests.get("http://127.0.0.1:9000/github/repos/kevin1024/vcrpy/contents").json()
 ```
 
 or you can browse to the url using your browser
@@ -88,7 +88,7 @@ or you can browse to the url using your browser
 Cornell will forward the request to the specified url and will record both the request and the response.
 
 
-The yaml cassettes will be recorded in dedicated dictory (`cassettes` in the root dir, by default)
+The yaml cassettes will be recorded in dedicated directory (`cassettes` in the root dir, by default)
 
 For example:
 
