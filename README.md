@@ -69,7 +69,7 @@ cornell -ff https://api.github.com/ --record -cd cassettes
 
 This will start the server in record-proxy mode on port `9000`, and will forward all requests to `https://api.github.com/`
 
-[![asciicast](https://asciinema.org/a/424496.svg)](https://asciinema.org/a/424496)
+![Cornell demo](https://imgur.com/ky5NBPf.gif)
 
 When cornell is in record mode, it will forward all request to the specified forwarding url, for example:
 

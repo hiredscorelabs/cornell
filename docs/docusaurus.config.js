@@ -36,6 +36,10 @@ module.exports = {
           title: 'HiredScore',
           items: [
             {
+              label: 'Github',
+              to: 'https://github.com/hiredscorelabs/cornell',
+            },
+            {
               label: 'HiredScore Website',
               to: 'https://hiredscore.com',
             },
