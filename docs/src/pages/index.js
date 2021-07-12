@@ -13,6 +13,19 @@ function HomepageHeader() {
       <div className="container">
         <h1 className="hero__title">{siteConfig.title}</h1>
         <p className="hero__subtitle">{siteConfig.tagline}</p>
+        <div style={{display: 'flex', flexDirection:'row', justifyContent:'center', gap: '10px'}}>
+          <Link
+            className="button button--secondary button--lg header-github-link"
+            to="https://github.com/hiredscorelabs/cornell">
+            GITHUB
+          </Link>
+          <Link
+            className="button button--secondary button--lg header-github-link"
+            to="docs/examples">
+            DOCS
+          </Link>
+
+        </div>
       </div>
     </header>
   );
