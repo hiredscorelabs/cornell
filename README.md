@@ -10,8 +10,8 @@
 
 > Cornell makes it dead simple, via its record and replay features to perform end-to-end testing in a fast and isolated testing environment.
 
-When your application integrates with multiple web based services, end-to-end testing is crucial before deploying to production.
-Mocking is often a tedious task, it becomes even more tiresome when working with multiple APIs from multiple vendors.
+When your application integrates with multiple web-based services, end-to-end testing is crucial before deploying to production.
+Mocking is often a tedious task. It becomes even more tiresome when working with multiple APIs from multiple vendors.
 
 [vcrpy](https://github.com/kevin1024/vcrpy) is an awesome library that records and replays HTTP interactions for unit tests. Its output is saved to reusable "cassette" files.
 
@@ -24,7 +24,7 @@ When you're working with distributed systems, the test client entry point trigge
 ![System in test](https://imgur.com/OlDNTiD.jpg) 
 
 With Cornell server started, it will act as a proxy (**record mode**) between the outgoing HTTP requests and the external server and will record all relevant interactions.
-Once interactions are recorded, Cornell can be work in **replay mode** and replace the external server entirely, short circuting the calls and instead, replying back instantly with the previously recorded response.
+Once interactions are recorded, Cornell can work in replay mode, replacing the external server entirely, short-circuiting the calls and instead, replying back instantly with the previously recorded response.
 
 ![System in test](https://imgur.com/ZXTFgaP.jpg) 
 
@@ -75,7 +75,7 @@ This will start the server in record-proxy mode on port `9000`, and will forward
 
 ![Cornell demo](https://imgur.com/ky5NBPf.gif)
 
-When cornell is in record mode, it will forward all request to the specified forwarding url, for example:
+When cornell is in record mode, it will forward all request to the specified forwarding URL, for example:
 
 ```
 requests.get("http://127.0.0.1:9000/github/repos/kevin1024/vcrpy/license").json()
@@ -85,14 +85,14 @@ or
 requests.get("http://127.0.0.1:9000/github/repos/kevin1024/vcrpy/contents").json()
 ```
 
-or you can browse to the url using your browser
+or you can browse to the URL using your browser
 
 ![Browser](https://imgur.com/GMgF6Cx.gif)
 
-Cornell will forward the request to the specified url and will record both the request and the response.
+Cornell will forward the request to the specified URL and will record both the request and the response.
 
 
-The yaml cassettes will be recorded in dedicated directory (`cassettes` in the root dir, by default)
+The yaml cassettes will be recorded to a dedicated directory (by default, `cassettes` in the root dir)
 
 For example:
 
@@ -110,7 +110,7 @@ Once stopped, all interactions will be mapped via an auto-generated `index.yaml`
 
 __Note__
 
-    In case the `index.yaml` was already present, it will be updated with new interactions, otherwise new file will be created.
+    In case the `index.yaml` is already present, it will be updated with new interactions. Otherwise, a new file will be created.
 
 In this specific example, we can see that the 2 requests are mapped to the saved cassettes:
 

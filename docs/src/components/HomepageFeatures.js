@@ -12,8 +12,7 @@ const FeatureList = [
     png: JBCaptainImageUrl,
     description: (
       <>
-        An HTTP proxy mode in which all interactions are recorded for future use,
-        this is later on saved into "cassetes" for future use.
+        An HTTP proxy mode in which all interactions are recorded and saved into "cassettes" for future use.
       </>
     ),
   },
@@ -22,8 +21,8 @@ const FeatureList = [
     png: JBHeroImageUrl,
     description: (
       <>
-        Use the library of "cassetes" to reply pre-recorded responses istead of hitting a real API end point.
-        Save time on testing cycles, avoid flakiness while providing consistent response.
+        Use your library of "cassettes" to replay pre-recorded responses instead of hitting the real API endpoint.
+        Save time on testing cycles and avoid flakiness by using a consistent response.
         
       </>
     ),
@@ -33,7 +32,7 @@ const FeatureList = [
     png: JBRockstarImageUrl,
     description: (
       <>
-        Cornell was designed with flexbility in mind such that it should be easy to customize usage beyond the default behaviors.
+        Designed with flexibility in mind. Easily extend and customize the default behavior.
       </>
     ),
   },

@@ -14,24 +14,24 @@ This will start the server in record-proxy mode on port `9000`, and will forward
 
 ![Cornell demo](https://imgur.com/ky5NBPf.gif)
 
-When cornell is in record mode, it will forward all request to the specified forwarding url, for example:
+When cornell is in record mode, it will forward all request to the specified forwarding URL, for example:
 
 ```
 requests.get("http://127.0.0.1:9000/github/repos/kevin1024/vcrpy/license").json()
 ```
 or
 ```
-requests.get("http://127.0.0.1:9000/github/repos/kevin1024/vcrpy/license").json()
+requests.get("http://127.0.0.1:9000/github/repos/kevin1024/vcrpy/contents").json()
 ```
 
-or you can browse to the url using your browser
+or you can browse to the URL using your browser
 
 ![Browser](https://imgur.com/GMgF6Cx.gif)
 
-Cornell will forward the request to the specified url and will record both the request and the response.
+Cornell will forward the request to the specified URL and will record both the request and the response.
 
 
-The yaml cassettes will be recorded in dedicated dictory (`cassettes` in the root dir, by default)
+The yaml cassettes will be recorded to a dedicated directory (by default, `cassettes` in the root dir)
 
 For example:
 
