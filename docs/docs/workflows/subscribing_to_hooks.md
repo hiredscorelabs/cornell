@@ -5,12 +5,12 @@ title: Subscribing to Hooks
 ---
 
 During runtime, Cornell triggers [blinker signals](https://pythonhosted.org/blinker/) that 
-will allow you to modify or extend some of the out-of-the-box functionality, at this point,
+will allow you to modify or extend some of the out-of-the-box functionality. At this point,
  the following is available:
  * Replacing default logging service
  * Modifying the listed cassette path (for example, if you prefer not to save your cassettes locally)
 
-List of signal can be found in [cornell/signals.py](https://github.com/hiredscorelabs/cornell/blob/master/cornell/signals.py)
+The list of signals can be found in [cornell/signals.py](https://github.com/hiredscorelabs/cornell/blob/master/cornell/signals.py#L11)
 
 Example:
 ```python
@@ -36,6 +36,8 @@ if __name__ == "__main__":
     start_mock_service()
 
 ```
-In the above example, we're replacing the default logging service with our own and in addition, every time Cornell requires a cassette file in runtime, we're downloading it from our dedicated storage.
+In the above example:
+ * We're replacing the default logging service with our own.
+ * Every time Cornell requires a cassette file in runtime, we're downloading it from our dedicated storage.
 
-**Note**: Additional signals can be easily added, please feel free to open a [PR](https://github.com/hiredscorelabs/cornell) or an [Issue](https://github.com/hiredscorelabs/cornell/issues)!
+**Note**: Additional signals can be easily added. Please feel free to open a [PR](https://github.com/hiredscorelabs/cornell) or an [Issue](https://github.com/hiredscorelabs/cornell/issues)!

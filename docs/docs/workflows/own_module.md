@@ -1,11 +1,11 @@
 ---
 sidebar_position: 2
-sidebar_label: Starting Cornell from your own module
-title: Starting Cornell from your own module
+sidebar_label: Starting Cornell from Your Own Module
+title: Starting Cornell from Your Own Module
 ---
 
 In order to extend Cornell with additional matchers, or register to its hooks,
- you first will need to start the cornell service from your own internal module.
+ you will first need to start the Cornell service from your own internal module.
  This can be easily done by inheriting `CornellCmdOptions` [click](https://click.palletsprojects.com/en/8.0.x/) from `cornell.cornell_server`
  
  For example: 
@@ -33,7 +33,7 @@ if __name__ == "__main__":
 ```
 In this example, we modified the following:
 
-* Set a default `cassettes_dir`, so when the wrapper is executed it will be used instead of a default one
+* Set a default `cassettes_dir`. When the wrapper is executed, it will be used instead of the default directory
 * Added another command argument, to extend possible functionality
 
 Running:
@@ -44,4 +44,4 @@ Running:
 
  `Hello from Cornell :)`
 
-Running the same command without arguments, will start Cornell, with with a default cassettes_dir.
+Running the same command without arguments will start Cornell with its default cassettes_dir.
