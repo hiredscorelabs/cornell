@@ -1,0 +1,7 @@
+[run]
+source = cornell
+
+[report]
+omit = cornell/_version.py
+
+fail_under = 70

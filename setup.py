@@ -21,7 +21,8 @@ requirements = [
 dev_requirements = {"dev" : [
     'pylint>=2.6.0',
     'requests-mock>=1.8.0',
-    'pytest>=6.2.2'
+    'pytest>=6.2.2',
+    'pytest-cov~=2.12',
 ]}
 
 setup(

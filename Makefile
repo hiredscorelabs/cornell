@@ -1,5 +1,6 @@
 test:
 	pylint --rcfile=.pylintrc cornell tests
+	pytest --cov=cornell tests
 
 configure:
 	pip install -e .'[dev]'
