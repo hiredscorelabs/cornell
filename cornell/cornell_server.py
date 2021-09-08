@@ -27,7 +27,7 @@ from cornell.signals import on_cornell_exit, signal_context
 
 app = Flask("CornellMock")
 DUMMY_URL = "http://cornell-proxy/"
-SUPPORTED_METHODS = ['GET', 'POST', 'PUT']
+SUPPORTED_METHODS = ['GET', 'POST', 'PUT', 'DELETE']
 ROOT_NAME = "root"
 
 
