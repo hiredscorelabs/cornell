@@ -8,6 +8,7 @@ from functools import partial
 from http import HTTPStatus
 from os import environ
 from pathlib import Path
+import signal
 
 import click
 import requests
@@ -224,6 +225,7 @@ def start_cornell(*, cassettes_dir, forward_uri, port, record, record_once, fixe
     app.logger.info("Starting Cornell", app_name=app.name, port=port, record=record, record_once=record_once,
                     fixed_path=fixed_path, forward_uri=forward_uri, cassettes_dir=str(cassettes_dir))
     atexit.register(on_cornell_exit, app=app)
+    signal.signal(signal.SIGTERM, lambda: on_cornell_exit(app))
     app.run(port=port, threaded=False)
 
 
