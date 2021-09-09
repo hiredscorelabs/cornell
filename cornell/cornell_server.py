@@ -63,18 +63,18 @@ def _build_initial_request(path):
     return requests.Request(request.method, url=url, headers=headers, data=request.data, params=request.args)
 
 
-def _process_response_body(response):
+def _process_response_body(response: requests.Response):
     response_body = response.raw.read()
     if app.config.record and xml_in_headers(response):
         response_body = replace_locations_in_xml(response_body)
     return response_body
 
 
-def _processes_headers(resp):
-    if resp.status_code not in (HTTPStatus.TEMPORARY_REDIRECT, HTTPStatus.PERMANENT_REDIRECT):
+def _processes_headers(response: requests.Response):
+    if response.status_code in (HTTPStatus.TEMPORARY_REDIRECT, HTTPStatus.PERMANENT_REDIRECT):
         # https://github.com/psf/requests/issues/3490
         for header in ('Content-Length', 'Content-Type', 'Transfer-Encoding'):
-            resp.headers.pop(header, None)
+            response.headers.pop(header, None)
 
 
 @contextmanager
