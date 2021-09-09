@@ -146,5 +146,5 @@ def set_underlying_vcr_logging_level(logging_level=logging.WARNING):
 
 def saved_data_to_yaml(data, yaml_path):
     yaml.safe_dump(
-        dict(data), open(yaml_path, "w"), encoding="utf-8", allow_unicode=True
+        dict(data), open(yaml_path, "w", encoding="utf-8"), encoding="utf-8", allow_unicode=True
     )
