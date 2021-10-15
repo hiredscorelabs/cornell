@@ -51,6 +51,10 @@ __Note__
 
     In case the `index.yaml` was already present, it will be updated with new interactions, otherwise new file will be created.
 
+__Note__
+
+    Cornell doesn't record interactions with an erroneous response, by default (i.e response with 404, will ommited). If you wish to enable this option, run cornell with --record-errors flag
+
 In this specific example, we can see that the 2 requests are mapped to the saved cassettes:
 
 ![Index file](https://imgur.com/IYjiJx6.gif)

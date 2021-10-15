@@ -1,5 +1,8 @@
+from http import HTTPStatus
+
 import vcr
 from flask import request
+from toolz import get_in
 from vcr.cassette import Cassette
 from vcr.request import Request
 from vcr.matchers import method
@@ -15,24 +18,28 @@ MATCHERS = {'host', 'method', 'path', 'port', 'scheme'}
 class CustomPersister(FilesystemPersister):
     base_uri = None
     mock_url = None
+    record_errors = False
 
     @classmethod
     def save_cassette(cls, cassette_path, cassette_dict, serializer):
-        for cassette_request in cassette_dict["requests"]:
+        for cassette_request, cassette_response in zip(cassette_dict["requests"], cassette_dict["responses"]):
+            if not cls.record_errors and get_in(["status", "code"], cassette_response) >= HTTPStatus.BAD_REQUEST:
+                return
+
             cassette_request.uri = cassette_request.uri.replace(cls.base_uri, cls.mock_url)
             if cassette_request.body and xml_in_headers(cassette_request):
                 cassette_request.body = strip_soap_namespaces_from_body(cassette_request.body)
 
-        for cassette_response in cassette_dict["responses"]:
             if any("xml" in content_type for content_type in cassette_response["headers"].get('Content-Type', [])):
                 cassette_response["body"]["string"] = replace_locations_in_xml(cassette_response["body"]["string"])
         FilesystemPersister.save_cassette(cassette_path, cassette_dict, serializer)
 
 
-def get_custom_vcr(base_uri, mock_uri, *additional_vcr_matchers):
+def get_custom_vcr(base_uri, mock_uri, record_errors, *additional_vcr_matchers):
     custom_vcr = vcr.VCR(decode_compressed_response=True)
     CustomPersister.base_uri = base_uri.rstrip("/")
     CustomPersister.mock_url = mock_uri.rstrip("/")
+    CustomPersister.record_errors = record_errors
     custom_vcr.register_persister(CustomPersister)
     match_on_list = MATCHERS
     match_on_list.update(_register_additional_matchers(custom_vcr, *additional_vcr_matchers, extended_vcr_body_matcher,

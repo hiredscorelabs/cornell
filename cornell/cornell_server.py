@@ -12,6 +12,7 @@ import signal
 
 import click
 import requests
+from requests import RequestException
 import yaml
 from flask import Flask, request
 from structlog import get_logger
@@ -50,6 +51,7 @@ def handle_requests(path):
         resp = requests.Session().send(initial_request.prepare(), stream=True)
         response_body = _process_response_body(resp)
         _processes_headers(resp)
+        resp.raise_for_status()
     return response_body, resp.status_code, resp.headers.items()
 
 
@@ -102,9 +104,17 @@ def _cassette_url_player_context(url_path):
         player_context = _obtain_player_context(str(cassette_path))
 
     with set_underlying_vcr_logging_level(), player_context():
-        yield url_path
-    added_path = {f"/{url_path}": Path(cassette_file).name if cassette_file else Path(cassette_path).name}
-    app.config.cassette_paths.setdefault(vcr_dir, {}).update(added_path)
+        save_cassette_to_index = True
+        try:
+            yield url_path
+        except RequestException:
+            save_cassette_to_index = not app.config.record or app.config.record_errors
+        finally:
+            if save_cassette_to_index:
+                added_path = {f"/{url_path}": Path(cassette_file).name if cassette_file else Path(cassette_path).name}
+                app.config.cassette_paths.setdefault(vcr_dir, {}).update(added_path)
+            elif app.config.record:
+                app.logger.info("Error encountered, cassette won't be recorded", cassette_path={cassette_path})
 
 
 def _determine_cassette_path(cassette_file, vcr_dir):
@@ -166,7 +176,8 @@ def create_cassettes_dir(cassettes_dir):
     return Path(home_dir)
 
 
-def _setup_app_config(*, app, cassettes_dir, fixed_path, forward_uri, record, record_once, additional_vcr_matchers):
+def _setup_app_config(*, app, cassettes_dir, fixed_path, forward_uri, record, record_once, additional_vcr_matchers,
+                      record_errors):
     environ["FLASK_ENV"] = environ.get("FLASK_ENV") or "local"
     app.config.cassettes_dir = create_cassettes_dir(cassettes_dir)
     app.config.record = record
@@ -175,7 +186,9 @@ def _setup_app_config(*, app, cassettes_dir, fixed_path, forward_uri, record, re
     app.config.fixed_path = fixed_path
     app.config.index_file = (Path(app.config.cassettes_dir)/"index.yaml").absolute()
     app.config.cassette_paths = _load_cassette_paths(app.config.cassettes_dir)
-    app.config.vcr = get_custom_vcr(app.config.base_uri, DUMMY_URL, *additional_vcr_matchers)
+    app.config.vcr = get_custom_vcr(base_uri=app.config.base_uri, mock_uri=DUMMY_URL, record_errors=record_errors,
+                                    *additional_vcr_matchers)
+    app.config.record_errors = record_errors
 
 
 def _get_logging_service():
@@ -196,23 +209,25 @@ class CornellCmdOptions(click.Command):
                    click.core.Option(("-", "--record-once/--record-all"), default=True, is_flag=True,
                                      help="Record each scenario only once, ignore the rest"),
                    click.core.Option(("-ff", "--forward_uri"), help="Must be provided in case of recording mode"),
-                   click.core.Option(("-p", "--port"), default=9000)]
+                   click.core.Option(("-p", "--port"), default=9000),
+                   click.core.Option(("-", "--record-errors"), default=False, is_flag=True,
+                                     help="If enabled, Cornell will record erroneous responses")]
         for option in options:
             self.params.insert(0, option)
 
 
 @click.command(cls=CornellCmdOptions)
-def start_mock_service(cassettes_dir, fixed_path, record, record_once, forward_uri, port):
+def start_mock_service(cassettes_dir, fixed_path, record, record_once, forward_uri, port, record_errors):
     """
     Usage Examples:
     Record mode: `cornell --forward_uri="https://remote_server/api" --record -cd custom_cassette_dir`
     Replay mode: `cornell -cd custom_cassette_dir
     """
     start_cornell(cassettes_dir=cassettes_dir, forward_uri=forward_uri, port=port, record=record,
-                  record_once=record_once, fixed_path=fixed_path)
+                  record_once=record_once, fixed_path=fixed_path, record_errors=record_errors)
 
 
-def start_cornell(*, cassettes_dir, forward_uri, port, record, record_once, fixed_path, additional_vcr_matchers=()):
+def start_cornell(*, cassettes_dir, forward_uri, port, record, record_once, fixed_path, record_errors, additional_vcr_matchers=()):
     app.config.update(PROPAGATE_EXCEPTIONS=True)
     if record and not forward_uri:
         raise click.ClickException("Record mode requires forward URI")
@@ -221,9 +236,11 @@ def start_cornell(*, cassettes_dir, forward_uri, port, record, record_once, fixe
         app.logger = logging_service or _get_logging_service()
 
     _setup_app_config(app=app, cassettes_dir=cassettes_dir, fixed_path=fixed_path, forward_uri=forward_uri,
-                      record=record, record_once=record_once, additional_vcr_matchers=additional_vcr_matchers)
+                      record=record, record_once=record_once, additional_vcr_matchers=additional_vcr_matchers,
+                      record_errors=record_errors)
     app.logger.info("Starting Cornell", app_name=app.name, port=port, record=record, record_once=record_once,
-                    fixed_path=fixed_path, forward_uri=forward_uri, cassettes_dir=str(cassettes_dir))
+                    fixed_path=fixed_path, forward_uri=forward_uri, cassettes_dir=str(cassettes_dir),
+                    record_errors=record_errors)
     atexit.register(on_cornell_exit, app=app)
     signal.signal(signal.SIGTERM, lambda: on_cornell_exit(app))
     app.run(port=port, threaded=False)
