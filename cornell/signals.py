@@ -11,6 +11,7 @@ cornell_signals = Namespace()
 # Supported Signals:
 logging_setup = cornell_signals.signal("logging_setup")
 process_cassette_file = cornell_signals.signal("process_cassette_file")
+additional_body_matching = cornell_signals.signal("additional_body_matching")
 
 
 class MultipleSignalSubscribers(Exception):
