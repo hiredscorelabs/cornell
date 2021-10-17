@@ -60,7 +60,7 @@ Options:
   -cd, --cassettes-dir TEXT       Cassettes parent directory, If not
                                   specified, Cornell parent dir will be used
 
-  -, --record-errors BOOLEAN      If enabled, Cornell will record erroneous
+  -re, --record-errors BOOLEAN    If enabled, Cornell will record erroneous
                                   responses
   --help                          Show this message and exit.
 ```
@@ -117,7 +117,7 @@ __Note__
 
 __Note__
 
-    Cornell doesn't record interactions with an erroneous response, by default (i.e response with 404, will ommited). If you wish to enable this option, run cornell with --record-errors flag
+    Cornell doesn't record interactions with an erroneous response, by default (i.e response with 404, will omitted). If you wish to enable this option, run cornell with --record-errors flag
 
 In this specific example, we can see that the 2 requests are mapped to the saved cassettes:
 

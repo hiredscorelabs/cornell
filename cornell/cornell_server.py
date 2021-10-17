@@ -210,7 +210,7 @@ class CornellCmdOptions(click.Command):
                                      help="Record each scenario only once, ignore the rest"),
                    click.core.Option(("-ff", "--forward_uri"), help="Must be provided in case of recording mode"),
                    click.core.Option(("-p", "--port"), default=9000),
-                   click.core.Option(("-", "--record-errors"), default=False, is_flag=True,
+                   click.core.Option(("-re", "--record-errors"), default=False, is_flag=True,
                                      help="If enabled, Cornell will record erroneous responses")]
         for option in options:
             self.params.insert(0, option)
