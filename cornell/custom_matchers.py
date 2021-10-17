@@ -5,6 +5,7 @@ from vcr.util import read_body
 
 from cornell.cornell_helpers import expand_in_query, ODATA_EXPEND_FILTER, xml_in_headers, \
     strip_soap_namespaces_from_body
+from cornell.signals import signal_context
 
 
 def requests_match_conditions(*conditions):
@@ -59,4 +60,6 @@ def _vcr_xml_body_matcher(cassette_request, received_request):
 
 @replace_matchers(_vcr_xml_body_matcher, xml_in_headers, lambda request: request.body)
 def extended_vcr_body_matcher(received_request, cassette_request):
-    body(cassette_request, received_request)
+    with signal_context("additional_body_matching", dict(cassette_request=cassette_request,
+                                                         received_request=received_request)) as body_matched:
+        return body_matched or body(cassette_request, received_request)
