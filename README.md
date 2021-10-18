@@ -68,7 +68,7 @@ Options:
 ## Demo - Full Example
 
 
-Staring Cornell in record mode:
+Start Cornell in record mode:
 
 ```
 cornell -ff https://api.github.com/ --record -cd cassettes
