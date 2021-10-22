@@ -47,6 +47,7 @@ Usage: cornell_server.py [OPTIONS]
   Replay mode: `cornell -cd custom_cassette_dir
 
 Options:
+  -h, --host TEXT
   -p, --port INTEGER
   -ff, --forward_uri TEXT         Must be provided in case of recording mode
   -, --record-once / --record-all
@@ -68,7 +69,7 @@ Options:
 ## Demo - Full Example
 
 
-Start Cornell in record mode:
+Staring Cornell in record mode:
 
 ```
 cornell -ff https://api.github.com/ --record -cd cassettes
