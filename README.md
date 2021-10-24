@@ -130,6 +130,20 @@ docker build -t cornell .
 docker run cornell --help
 ```
 
+You will probably need to import cassettes from a local directory from your computer. 
+To do that, use the following command to mount a local directory as a volume in the container.
+
+```bash
+docker run  -v ~/cassettes:/var/cassettes cornell -cd /var/cassettes
+```
+
+In some case, you want to use another port with cornell. If you need to do that, you should use
+docker port mapping as in the following where cornell will listen on port `9020`.
+
+```bash
+docker run -p 9020:9000 cornell
+```
+
 ## Features
 
 ### Request Matchers
