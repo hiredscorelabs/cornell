@@ -209,6 +209,7 @@ class CornellCmdOptions(click.Command):
                    click.core.Option(("-", "--record-once/--record-all"), default=True, is_flag=True,
                                      help="Record each scenario only once, ignore the rest"),
                    click.core.Option(("-ff", "--forward_uri"), help="Must be provided in case of recording mode"),
+                   click.core.Option(("-h", "--host"), default="127.0.0.1"),
                    click.core.Option(("-p", "--port"), default=9000),
                    click.core.Option(("-re", "--record-errors"), default=False, is_flag=True,
                                      help="If enabled, Cornell will record erroneous responses")]
@@ -217,17 +218,17 @@ class CornellCmdOptions(click.Command):
 
 
 @click.command(cls=CornellCmdOptions)
-def start_mock_service(cassettes_dir, fixed_path, record, record_once, forward_uri, port, record_errors):
+def start_mock_service(cassettes_dir, fixed_path, record, record_once, forward_uri, host, port, record_errors):
     """
     Usage Examples:
     Record mode: `cornell --forward_uri="https://remote_server/api" --record -cd custom_cassette_dir`
     Replay mode: `cornell -cd custom_cassette_dir
     """
-    start_cornell(cassettes_dir=cassettes_dir, forward_uri=forward_uri, port=port, record=record,
+    start_cornell(cassettes_dir=cassettes_dir, forward_uri=forward_uri, host=host, port=port, record=record,
                   record_once=record_once, fixed_path=fixed_path, record_errors=record_errors)
 
 
-def start_cornell(*, cassettes_dir, forward_uri, port, record, record_once, fixed_path, record_errors, additional_vcr_matchers=()):
+def start_cornell(*, cassettes_dir, forward_uri, host, port, record, record_once, fixed_path, record_errors, additional_vcr_matchers=()):
     app.config.update(PROPAGATE_EXCEPTIONS=True)
     if record and not forward_uri:
         raise click.ClickException("Record mode requires forward URI")
@@ -238,12 +239,12 @@ def start_cornell(*, cassettes_dir, forward_uri, port, record, record_once, fixe
     _setup_app_config(app=app, cassettes_dir=cassettes_dir, fixed_path=fixed_path, forward_uri=forward_uri,
                       record=record, record_once=record_once, additional_vcr_matchers=additional_vcr_matchers,
                       record_errors=record_errors)
-    app.logger.info("Starting Cornell", app_name=app.name, port=port, record=record, record_once=record_once,
+    app.logger.info("Starting Cornell", app_name=app.name, host=host, port=port, record=record, record_once=record_once,
                     fixed_path=fixed_path, forward_uri=forward_uri, cassettes_dir=str(cassettes_dir),
                     record_errors=record_errors)
     atexit.register(on_cornell_exit, app=app)
     signal.signal(signal.SIGTERM, lambda: on_cornell_exit(app))
-    app.run(port=port, threaded=False)
+    app.run(host=host, port=port, threaded=False)
 
 
 if __name__ == "__main__":
