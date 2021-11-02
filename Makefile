@@ -5,10 +5,8 @@ test:
 configure:
 	pip install -e .'[dev]'
 
-docker_build:
+docker_build_push:
 	docker build . -t hiredscorelabs/cornell:latest
-
-docker_push
 	echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 	docker push hiredscorelabs/cornell:latest
 

@@ -9,6 +9,6 @@ script:
   - make test
 deploy:
   provider: script
-  script: bash docker_push.sh
+  script: make docker_build_push
   on:
     branch: docker-build-push
