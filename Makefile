@@ -7,7 +7,7 @@ configure:
 
 docker_build_push:
 	docker build . -t hiredscorelabs/cornell:latest
-	echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+	echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
 	docker push hiredscorelabs/cornell:latest
 
 publish:
