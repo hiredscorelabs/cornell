@@ -16,4 +16,4 @@ jobs:
         provider: script
         script: make docker_build_push
         on:
-          branch: docker-build-push
+          branch: master
