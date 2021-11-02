@@ -124,6 +124,9 @@ In this specific example, we can see that the 2 requests are mapped to the saved
 ![Index file](https://imgur.com/IYjiJx6.gif)
 
 ### Start cornell as docker container
+docker run hiredscorelabs/cornell:latest
+
+### Build cornell as docker container
 
 ```bash
 docker build -t cornell .
