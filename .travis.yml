@@ -7,3 +7,13 @@ install:
   - make configure
 script:
   - make test
+
+jobs:
+  include:
+    - stage: deploy
+      python: 3.9
+      deploy:
+        provider: script
+        script: make docker_build_push
+        on:
+          branch: master

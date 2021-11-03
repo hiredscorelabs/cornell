@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.com/hiredscorelabs/cornell.svg?branch=master)](https://app.travis-ci.com/github/hiredscorelabs/cornell)
 [![Python Version](https://img.shields.io/badge/python-3.7%20%7C%203.8%20%7C%203.9-blue)](https://www.python.org/downloads/release/python-390/)
-
+[![Docker Hub](https://img.shields.io/docker/pulls/hiredscorelabs/cornell.svg)](https://hub.docker.com/repository/docker/hiredscorelabs/cornell)
 
 <p align="center">
   <img src="https://imgur.com/ShxP4AI.png" alt="Cornell Logo">
@@ -124,6 +124,9 @@ In this specific example, we can see that the 2 requests are mapped to the saved
 ![Index file](https://imgur.com/IYjiJx6.gif)
 
 ### Start cornell as docker container
+docker run hiredscorelabs/cornell:latest
+
+### Build cornell as docker container
 
 ```bash
 docker build -t cornell .
