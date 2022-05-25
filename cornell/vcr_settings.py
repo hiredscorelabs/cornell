@@ -35,7 +35,7 @@ class CustomPersister(FilesystemPersister):
         FilesystemPersister.save_cassette(cassette_path, cassette_dict, serializer)
 
 
-def get_custom_vcr(base_uri, mock_uri, record_errors, *additional_vcr_matchers):
+def get_custom_vcr(*additional_vcr_matchers, base_uri, mock_uri, record_errors):
     custom_vcr = vcr.VCR(decode_compressed_response=True)
     CustomPersister.base_uri = base_uri.rstrip("/")
     CustomPersister.mock_url = mock_uri.rstrip("/")
