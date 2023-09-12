@@ -12,7 +12,7 @@ requirements = [
     'requests',
     'structlog',
     'toolz',
-    'vcrpy~=4.0',
+    'vcrpy~=5.0',
     'xmltodict',
     'click',
     'blinker'
