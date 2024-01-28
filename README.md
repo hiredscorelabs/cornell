@@ -47,9 +47,10 @@ Usage: cornell_server.py [OPTIONS]
   Replay mode: `cornell -cd custom_cassette_dir
 
 Options:
+  -h, --host TEXT                 Set listen ip address
   -p, --port INTEGER
   -ff, --forward_uri TEXT         Must be provided in case of recording mode
-  -, --record-once / --record-all
+  - , --record-once / --record-all
                                   Record each scenario only once, ignore the
                                   rest
 
