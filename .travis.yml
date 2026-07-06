@@ -1,8 +1,6 @@
 language: python
 python:
-  - "3.7.11"
-  - "3.8"
-  - "3.9"
+  - "3.10.16"
 install:
   - make configure
 script:
@@ -11,7 +9,7 @@ script:
 jobs:
   include:
     - stage: deploy
-      python: 3.9
+      python: "3.10.16"
       deploy:
         provider: script
         script: make docker_build_push

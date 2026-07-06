@@ -10,26 +10,23 @@ workflows:
 jobs:
   test-flow:
     docker:
-      - image: cimg/python:3.11.5
+      - image: cimg/python:3.10.16
     steps:
       - checkout
       - run:
-          name: Create virtualenv
+          name: Install uv
           command: |
-            python -m venv ~/venv
+            curl -LsSf https://astral.sh/uv/install.sh | sh
+            echo 'export PATH="$HOME/.local/bin:$PATH"' >> $BASH_ENV
       - run:
           name: Install dependencies
           command: |
-            . ~/venv/bin/activate
-            pip install -U pip
-            pip install --progress-bar off -r requirements.txt -U -e .
+            make configure
       - run:
           name: Run pylint
           command: |
-            . ~/venv/bin/activate
-            pylint --rcfile=.pylintrc cornell tests
+            uv run pylint --rcfile=.pylintrc cornell tests
       - run:
           name: Run pytest
           command: |
-            . ~/venv/bin/activate
-            pytest
+            uv run pytest

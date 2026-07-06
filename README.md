@@ -1,7 +1,7 @@
 # Cornell: record & replay mock server
 
 [![Build Status](https://travis-ci.com/hiredscorelabs/cornell.svg?branch=master)](https://app.travis-ci.com/github/hiredscorelabs/cornell)
-[![Python Version](https://img.shields.io/badge/python-3.7%20%7C%203.8%20%7C%203.9-blue)](https://www.python.org/downloads/release/python-390/)
+[![Python Version](https://img.shields.io/badge/python-3.10-blue)](https://www.python.org/downloads/release/python-3100/)
 [![Docker Hub](https://img.shields.io/docker/pulls/hiredscorelabs/cornell.svg)](https://hub.docker.com/r/hiredscorelabs/cornell)
 
 <p align="center">
