@@ -11,6 +11,7 @@ docker_build_push:
 	docker push hiredscorelabs/cornell:latest
 
 publish:
+	rm -rf dist/
 	uv build
 	uv publish
 
