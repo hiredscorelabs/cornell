@@ -1,9 +1,9 @@
 test:
-	pylint --rcfile=.pylintrc cornell tests
-	pytest --cov=cornell tests
+	uv run pylint --rcfile=.pylintrc cornell tests
+	uv run pytest --cov=cornell tests
 
 configure:
-	pip install -e .'[dev]'
+	uv sync --extra dev
 
 docker_build_push:
 	docker build . -t hiredscorelabs/cornell:latest
@@ -11,9 +11,8 @@ docker_build_push:
 	docker push hiredscorelabs/cornell:latest
 
 publish:
-	python setup.py sdist
-	pip install twine
-	twine upload dist/*
+	uv build
+	uv publish
 
 docker_tag_push:
 	REPO="hiredscorelabs/cornell"

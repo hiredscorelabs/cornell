@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cornell"
+version = "2.0.0"
+description = "Cornell: record & replay mock server"
+readme = "README.md"
+license = "MIT"
+authors = [{ name = "Yael Mintz", email = "yaelmi3@gmail.com" }]
+requires-python = ">=3.10"
+dependencies = [
+    "flask>=2.0.0",
+    "yarl",
+    "requests",
+    "structlog",
+    "toolz",
+    "vcrpy>=4,<8",
+    "xmltodict",
+    "click",
+    "blinker",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pylint>=2.6.0",
+    "requests-mock>=1.8.0",
+    "pytest>=6.2.2",
+    "pytest-cov~=2.12",
+]
+
+[project.scripts]
+cornell = "cornell.cornell_server:start_mock_service"
+
+[project.urls]
+Homepage = "https://hiredscorelabs.github.io/cornell/"
+Documentation = "https://hiredscorelabs.github.io/cornell/"
+Source = "https://github.com/hiredscorelabs/cornell"
+
+[tool.setuptools.packages.find]
+where = ["."]

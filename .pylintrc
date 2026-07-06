@@ -1,5 +1,5 @@
 [MESSAGES CONTROL]
-disable=R,missing-docstring,redefined-outer-name
+disable=R,missing-docstring,redefined-outer-name,unsupported-membership-test
 
 [FORMAT]
 max-line-length=140
